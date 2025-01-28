@@ -11,7 +11,7 @@ export class PagesController {
 
   @Post()
   addPages(@Body() createPageDto: CreatePageDto) {
-    return;
+    return this.pageService.addPage(createPageDto);
   }
 
   getPageById(id: number) {
