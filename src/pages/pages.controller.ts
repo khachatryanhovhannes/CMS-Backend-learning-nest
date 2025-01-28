@@ -1,12 +1,14 @@
-import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Post, ValidationPipe } from '@nestjs/common';
 import { CreatePageDto } from './dto';
 import { PagesService } from './pages.service';
 
 @Controller('pages')
 export class PagesController {
   constructor(private readonly pageService: PagesService) {}
+
+  @Get()
   getPages() {
-    return 'Get all pages';
+    return this.pageService.getAllPages();
   }
 
   @Post()

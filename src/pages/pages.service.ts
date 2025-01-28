@@ -19,4 +19,8 @@ export class PagesService {
     this.pages.push(createPageDto);
     return createPageDto;
   }
+
+  getAllPages() {
+    return this.pages;
+  }
 }
