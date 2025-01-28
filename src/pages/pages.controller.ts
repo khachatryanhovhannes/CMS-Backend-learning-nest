@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -37,7 +38,8 @@ export class PagesController {
     return this.pageService.updatePage(id, updatePageDto);
   }
 
-  deletePage(id: number) {
-    return `Delete page by id: ${id}`;
+  @Delete(':id')
+  deletePage(@Param('id', ParseIntPipe) id: number) {
+    return this.pageService.deletePage(id);
   }
 }

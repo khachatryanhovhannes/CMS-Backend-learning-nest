@@ -38,4 +38,14 @@ export class PagesService {
     Object.assign(page, updatePageDto);
     return page;
   }
+
+  deletePage(id: number) {
+    const index = this.pages.findIndex((page, index) => index === id);
+    if (index === -1) {
+      throw new NotFoundException('Page not found');
+    }
+
+    this.pages.splice(index, 1);
+    return true;
+  }
 }
