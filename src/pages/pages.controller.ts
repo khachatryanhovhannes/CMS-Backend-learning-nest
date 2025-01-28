@@ -16,17 +16,17 @@ export class PagesController {
   constructor(private readonly pageService: PagesService) {}
 
   @Get()
-  getPages() {
+  getPages(): CreatePageDto[] {
     return this.pageService.getAllPages();
   }
 
   @Post()
-  addPages(@Body() createPageDto: CreatePageDto) {
+  addPages(@Body() createPageDto: CreatePageDto): CreatePageDto {
     return this.pageService.addPage(createPageDto);
   }
 
   @Get(':id')
-  getPageById(@Param('id', ParseIntPipe) id: number) {
+  getPageById(@Param('id', ParseIntPipe) id: number): CreatePageDto {
     return this.pageService.getPageById(id);
   }
 
@@ -34,12 +34,12 @@ export class PagesController {
   updatePage(
     @Param('id', ParseIntPipe) id: number,
     @Body() updatePageDto: UpdatePageDto,
-  ) {
+  ): CreatePageDto {
     return this.pageService.updatePage(id, updatePageDto);
   }
 
   @Delete(':id')
-  deletePage(@Param('id', ParseIntPipe) id: number) {
+  deletePage(@Param('id', ParseIntPipe) id: number): boolean {
     return this.pageService.deletePage(id);
   }
 }

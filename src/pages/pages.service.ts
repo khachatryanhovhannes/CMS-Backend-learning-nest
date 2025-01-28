@@ -5,17 +5,17 @@ import { CreatePageDto, UpdatePageDto } from './dto';
 export class PagesService {
   private readonly pages: CreatePageDto[] = [
     {
-      title: 'Default Page Title',
-      content: 'This is the default content for the page.',
-      category: 'General',
+      title: 'Test Page 1',
+      content: 'Content for page 1',
+      category: 'Category 1',
       metadata: {
-        description: 'Default page description',
-        keywords: 'default, page, content',
+        description: 'Description 1',
+        keywords: 'test,page1',
       },
     },
   ];
 
-  addPage(createPageDto: CreatePageDto) {
+  addPage(createPageDto: CreatePageDto): CreatePageDto {
     this.pages.push(createPageDto);
     return createPageDto;
   }
@@ -24,7 +24,7 @@ export class PagesService {
     return this.pages;
   }
 
-  getPageById(id: number) {
+  getPageById(id: number): CreatePageDto {
     const page = this.pages.find((page, index) => index === id);
     if (!page) {
       throw new NotFoundException('Page not found');
@@ -33,13 +33,13 @@ export class PagesService {
     return page;
   }
 
-  updatePage(id: number, updatePageDto: UpdatePageDto) {
+  updatePage(id: number, updatePageDto: UpdatePageDto): CreatePageDto {
     const page = this.getPageById(id);
-    Object.assign(page, updatePageDto);
-    return page;
+    const updatedPage = { ...page, ...updatePageDto } as CreatePageDto;
+    return updatedPage;
   }
 
-  deletePage(id: number) {
+  deletePage(id: number): boolean {
     const index = this.pages.findIndex((page, index) => index === id);
     if (index === -1) {
       throw new NotFoundException('Page not found');
