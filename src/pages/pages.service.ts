@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreatePageDto } from './dto';
+import { CreatePageDto, UpdatePageDto } from './dto';
 
 @Injectable()
 export class PagesService {
@@ -30,6 +30,12 @@ export class PagesService {
       throw new NotFoundException('Page not found');
     }
 
+    return page;
+  }
+
+  updatePage(id: number, updatePageDto: UpdatePageDto) {
+    const page = this.getPageById(id);
+    Object.assign(page, updatePageDto);
     return page;
   }
 }

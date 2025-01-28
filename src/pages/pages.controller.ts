@@ -5,8 +5,9 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  Put,
 } from '@nestjs/common';
-import { CreatePageDto } from './dto';
+import { CreatePageDto, UpdatePageDto } from './dto';
 import { PagesService } from './pages.service';
 
 @Controller('pages')
@@ -28,8 +29,12 @@ export class PagesController {
     return this.pageService.getPageById(id);
   }
 
-  updatePage(id: number) {
-    return `Update page by id: ${id}`;
+  @Put(':id')
+  updatePage(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updatePageDto: UpdatePageDto,
+  ) {
+    return this.pageService.updatePage(id, updatePageDto);
   }
 
   deletePage(id: number) {
