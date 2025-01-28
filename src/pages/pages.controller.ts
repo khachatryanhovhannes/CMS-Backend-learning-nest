@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
 import { CreatePageDto } from './dto';
 import { PagesService } from './pages.service';
 
@@ -10,7 +10,7 @@ export class PagesController {
   }
 
   @Post()
-  addPages(@Body() createPageDto: CreatePageDto) {
+  addPages(@Body(ValidationPipe) createPageDto: CreatePageDto) {
     return this.pageService.addPage(createPageDto);
   }
 
