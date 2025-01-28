@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePageDto } from './dto';
 
 @Injectable()
@@ -22,5 +22,14 @@ export class PagesService {
 
   getAllPages() {
     return this.pages;
+  }
+
+  getPageById(id: number) {
+    const page = this.pages.find((page, index) => index === id);
+    if (!page) {
+      throw new NotFoundException('Page not found');
+    }
+
+    return page;
   }
 }
